@@ -16,6 +16,8 @@ header {
   color: #000;
   border-left: 1px solid #000;
   padding: 10px;
+  margin-left: 10px;
+  width: 1000px;
 }
 
 .timeBlockCont {
@@ -29,22 +31,24 @@ header {
   margin-top: 1px;
 }
 
-.time-block {
+/*.time-block {
   height: 100px;
   width: 100px;
-  border-radius: 15px;
   align-items: center;
   justify-content: center;
-}
+}*/
 
 .row {
-  border-top: 1px solid #fff;
+  border-top: 1px dashed #000;
+  height: 100px;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
 }
 
 .hour {
   background-color: #fff;
   color: #000;
-  border-top: 1px dashed #000;
 }
 
 .past {
