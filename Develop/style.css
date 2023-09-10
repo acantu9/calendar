@@ -6,6 +6,11 @@ body {
 
 header {
   border-bottom: 10px solid #000;
+  
+}
+
+#currentDay {
+  font-size: 25px;
 }
 
 .description {

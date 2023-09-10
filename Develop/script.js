@@ -20,6 +20,7 @@ $(document).ready(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
+  
   // Step 1: Identify the save button element
   /*const saveButton = document.querySelectorAll('saveBtn');
 
@@ -58,7 +59,7 @@ $(document).ready(function () {
   const hour = parseInt(description.id.split("-")[1]);
 
     // Check if the hour is in the past, present, or future
-    if (hour <= currentHour) {
+    if (hour < currentHour) {
       description.classList.add("past");
     } else if (hour === currentHour) {
       description.classList.add("present");
