@@ -19,7 +19,32 @@ $(document).ready(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
- 
+
+  // Step 1: Identify the save button element
+  /*const saveButton = document.querySelectorAll('saveBtn');
+
+  // Step 2: Add a click event listener to the save button
+  saveButton.addEventListener('click', saveUserInput() {
+    // Step 3: Callback function executed when the button is clicked
+    
+    // Step 4: Access the user input from the corresponding time-block
+    const userInput = this.parentNode.querySelector('description').value;
+
+    // Step 5: Retrieve the id of the containing time-block element
+    const timeBlockId = this.parentNode.getAttribute('id');
+
+    // Step 6: Create an object or data structure to store the user input
+    const data = {
+      [timeBlockId]: userInput
+    };
+
+    // Step 7: Convert the data to a string
+    const dataString = JSON.stringify(data);
+
+    // Step 8: Save the stringified data in local storage
+    localStorage.setItem(timeBlockId, dataString);
+  });*/
+
   // Apply the past, present, or future class to each textarea
   // Get the current hour
   const currentHour = new Date().getHours();
