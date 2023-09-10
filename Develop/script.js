@@ -1,7 +1,18 @@
-// Call to jQuery to ensure that the code isn't run
-// until the browser has finished rendering all the elements in the html.
+// Call to jQuery to ensure that the code runs after all html elements render
 
- $(document).ready(function () {
+$(document).ready(function () {
+ // Get the current date
+  const currentDate = new Date();
+
+  // Get the current day of the week, month and date
+  const currentDayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+  const currentMonth = currentDate.toLocaleDateString('en-US', { month: 'long' });
+  const currentDateOfMonth = currentDate.getDate();
+
+  // Display the current day of the week, month, and date in the HTML elements
+  const currentDayOfWeekElement = document.getElementById("currentDay");
+  currentDayOfWeekElement.textContent = currentDayOfWeek + ", " + currentMonth + " " + currentDateOfMonth;
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
