@@ -13,6 +13,26 @@ $(document).ready(function () {
   const currentDayOfWeekElement = document.getElementById("currentDay");
   currentDayOfWeekElement.textContent = currentDayOfWeek + ", " + currentMonth + " " + currentDateOfMonth;
 
+  // Apply the past, present, or future class to each textarea
+  // Get the current hour
+  // Select all description elements
+  // Loop through each description element
+  // Get the hour value from the id attribute of the description
+  const currentHour = new Date().getHours();
+  const timeBlocks = document.querySelectorAll(".description");
+  timeBlocks.forEach((description) => {
+  const hour = parseInt(description.id.split("-")[1]);
+
+    // Check if the hour is in the past, present, or future & render accordingly
+    if (hour < currentHour) {
+      description.classList.add("past");
+    } else if (hour === currentHour) {
+      description.classList.add("present");
+    } else {
+      description.classList.add("future");
+    }
+  });
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -20,12 +40,12 @@ $(document).ready(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-  
   // Step 1: Identify the save button element
-  /*const saveButton = document.querySelectorAll('saveBtn');
+  const saveButton = document.querySelectorAll('saveBtn');
 
   // Step 2: Add a click event listener to the save button
-  saveButton.addEventListener('click', saveUserInput() {
+  saveButton.addEventListener('click', function() {
+    console.log(`Save Button Clicked`);
     // Step 3: Callback function executed when the button is clicked
     
     // Step 4: Access the user input from the corresponding time-block
@@ -36,7 +56,7 @@ $(document).ready(function () {
 
     // Step 6: Create an object or data structure to store the user input
     const data = {
-      [timeBlockId]: userInput
+    [timeBlockId]: userInput
     };
 
     // Step 7: Convert the data to a string
@@ -44,28 +64,6 @@ $(document).ready(function () {
 
     // Step 8: Save the stringified data in local storage
     localStorage.setItem(timeBlockId, dataString);
-  });*/
-
-  // Apply the past, present, or future class to each textarea
-  // Get the current hour
-  const currentHour = new Date().getHours();
-
-  // Select all time-block elements
-  const timeBlocks = document.querySelectorAll(".description");
-
-  // Loop through each time-block element
-  timeBlocks.forEach((description) => {
-  // Get the hour value from the id attribute of the time-block
-  const hour = parseInt(description.id.split("-")[1]);
-
-    // Check if the hour is in the past, present, or future
-    if (hour < currentHour) {
-      description.classList.add("past");
-    } else if (hour === currentHour) {
-      description.classList.add("present");
-    } else {
-      description.classList.add("future");
-    }
   });
 
   // TODO: Add code to get any user input that was saved in localStorage and set
