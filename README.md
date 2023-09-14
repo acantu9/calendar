@@ -6,7 +6,7 @@ This is a simple calendar app for scheduling your work day. It allows you to cre
 
 ## Getting Started
 
-[Click this link](link) to get started!
+[Click this link](https://acantu9.github.io/work-day-scheduler/) to get started!
 
 ## Features
 
