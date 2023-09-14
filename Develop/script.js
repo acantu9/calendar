@@ -37,21 +37,23 @@ $(document).ready(function () {
   });
 
   // Update Schedule
-  schedules.forEach(function(schedule) {
+  /*schedules.forEach(function(schedule) {
     // Check if schedule matches description
     if (description.getAttribute("data-hour") === schedule.hour) {
       description.querySelector("textarea").value = schedule.text;
     }
+  });*/
+  
+  timeBlockEl.forEach((element) => {
+    element.addEventListener("click", function (event) {
+      if (event.target.matches('.saveBtn')) {
+        console.log("clicked button");
+        console.log(event.target);
+        saveSchedule(event);
+      }
+    });
   });
   
-  timeBlockEl.addEventListener("click", function (event) {
-    if (event.target.matches('.saveBtn')) {
-      console.log("clicked button");
-      console.log(event.target);
-      saveSchedule(event);
-    }
-  });
-
   function saveSchedule(event) {
     const hour = event.target.parentElement.getAttribute("data-hour");
     const text = event.target.parentElement.querySelector("textarea").value.trim();
@@ -64,7 +66,7 @@ $(document).ready(function () {
     console.log("text", text);
     console.log("description", newDescription);
 
-    if(localStorage.getItem('.description')) {
+    if(localStorage.getItem('description')) {
       // parse will take JSON string ---> JavaScript object/array
       const descriptions = JSON.parse(localStorage.getItem('.description'));
 
@@ -88,8 +90,21 @@ $(document).ready(function () {
       // push new description into descriptions array
       descriptions.push(newDescription);
       // add back into local storage
-      localStorage.setItem('.description', JSON.stringify(descriptions));
+      localStorage.setItem('schedules', JSON.stringify(descriptions));
+    } else {
+      const schedules = [];
+      schedules.push(newDescription);
+      localStorage.setItem('schedules',JSON.stringify(schedules));
     }
   }
- 
+
+  // Update the page with content from local storage
+  function loadDescriptions() {
+    const schedules = JSON.parse(localStorage.getItem('schedules'));
+  }
+
+  window.onload = function() {
+    loadDescriptions();
+  };
+  
 });
