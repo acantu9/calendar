@@ -1,4 +1,4 @@
-// Call to jQuery to ensure that the code runs after all html elements render
+// Call to jQuery to ensure that the code runs after all html elements render completely
 
 $(document).ready(function () {
   // Get the current date
@@ -20,8 +20,11 @@ $(document).ready(function () {
   // Get the hour value from the id attribute of the description
   const currentHour = new Date().getHours();
   const timeBlocks = document.querySelectorAll(".description");
+  const timeBlockEl = document.querySelectorAll(".timeBlockCont");
+  const schedules = JSON.parse(localStorage.getItem("schedules")) || [];
+  
   timeBlocks.forEach((description) => {
-  const hour = parseInt(description.id.split("-")[1]);
+    const hour = parseInt(description.id.split("-")[1]);
 
     // Check if the hour is in the past, present, or future & render accordingly
     if (hour < currentHour) {
@@ -33,41 +36,60 @@ $(document).ready(function () {
     }
   });
 
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-
-  // Step 1: Identify the save button element
-  const saveButton = document.querySelectorAll('saveBtn');
-
-  // Step 2: Add a click event listener to the save button
-  saveButton.addEventListener('click', function() {
-    console.log(`Save Button Clicked`);
-    // Step 3: Callback function executed when the button is clicked
-    
-    // Step 4: Access the user input from the corresponding time-block
-    const userInput = this.parentNode.querySelector('description').value;
-
-    // Step 5: Retrieve the id of the containing time-block element
-    const timeBlockId = this.parentNode.getAttribute('id');
-
-    // Step 6: Create an object or data structure to store the user input
-    const data = {
-    [timeBlockId]: userInput
-    };
-
-    // Step 7: Convert the data to a string
-    const dataString = JSON.stringify(data);
-
-    // Step 8: Save the stringified data in local storage
-    localStorage.setItem(timeBlockId, dataString);
+  // Update Schedule
+  schedules.forEach(function(schedule) {
+    // Check if schedule matches description
+    if (description.getAttribute("data-hour") === schedule.hour) {
+      description.querySelector("textarea").value = schedule.text;
+    }
+  });
+  
+  timeBlockEl.addEventListener("click", function (event) {
+    if (event.target.matches('.saveBtn')) {
+      console.log("clicked button");
+      console.log(event.target);
+      saveSchedule(event);
+    }
   });
 
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
+  function saveSchedule(event) {
+    const hour = event.target.parentElement.getAttribute("data-hour");
+    const text = event.target.parentElement.querySelector("textarea").value.trim();
+    const newDescription = {
+      hour: hour,
+      text : text
+    };
+
+    console.log("hour", hour);
+    console.log("text", text);
+    console.log("description", newDescription);
+
+    if(localStorage.getItem('.description')) {
+      // parse will take JSON string ---> JavaScript object/array
+      const descriptions = JSON.parse(localStorage.getItem('.description'));
+
+      // Check if description has existing hour event
+      // If it does
+      // Remove that event
+      // Replace with the new description
+      // If it does not
+      // PUSH per usual
+
+      // Check if the hour we are adding is in the description array
+      const indexRmv = descriptions.findIndex(function (description) {
+        console.log(description);
+        if(newDescription.hour === description.hour) {
+          return true;
+        }
+      });
+      if (indexRmv !== - 1) {
+        descriptions.splice(indexRmv, 1);
+      }
+      // push new description into descriptions array
+      descriptions.push(newDescription);
+      // add back into local storage
+      localStorage.setItem('.description', JSON.stringify(descriptions));
+    }
+  }
  
 });

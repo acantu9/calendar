@@ -4,13 +4,13 @@ body {
   text-align: center;
 }
 
+#currentDay {
+  font-size: 25px;
+}
+
 header {
   border-bottom: 10px solid #000;
   
-}
-
-#currentDay {
-  font-size: 25px;
 }
 
 .description {
@@ -52,17 +52,21 @@ header {
 
 .past {
   background-color: #d3d3d3;
-  color: #fff;
+  color: #666;
 }
 
 .present {
   background-color: #ff6961;
-  color: #fff;
+  color: #666;
 }
 
 .future {
   background-color: #77dd77;
-  color: #fff;
+  color: #666;
+}
+
+button {
+  background-image: url('img-1.png');
 }
 
 .saveBtn {
