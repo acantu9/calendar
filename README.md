@@ -1,6 +1,6 @@
 # Work Day Scheduler
 
-![Image of Work Day Scheduler rendered on a webpage](link)
+![Image of Work Day Scheduler rendered on a webpage](img-2.png)
 
 This is a simple calendar app for scheduling your work day. It allows you to create and save events for each hour of the day.
 
